@@ -1,0 +1,1076 @@
+p90types of approch 
+1. object orrianted approch
+-here we use objects to solve the problems
+-focus on reusable codes (DRY Principle)
+
+2. functional approch
+
+
+
+OOP's Concepts
+
+*CLASS-
+-A blueprint of creating objects.
+(when we fill details in class code it becomes object eg. travel form of indian railway, when we fill with name it becomes our form with my information)
+
+syntex: class name:
+            #code
+
+eg. class Employee:
+        name= "Dev"
+        language="py"    # this is an class attribute
+        salary= 1200000
+dev= Employee()
+print(dev.name, dev.language)
+
+eg. rohan = Employee
+rohan.name = Roro Rohan   # this is an object attribute(instance attribute)
+print(rohan.name, rohan.language, rohan.salary)
+
+note:  -Here name is object attribute and salary and language is class attribute as they directly belong to the class.
+-instance attribute take preferance over class attribute during assignment & retrieval
+
+
+
+*self parameters 
+-self refers to the instance of the class.
+-it is automatically passes with a function call from an object.
+
+syntax: harry.getSalary()  # Self is harry here
+#equivalent to employee.getSalary(harry)
+
+eg 1.
+class Employee:
+    company = "goolge"
+    def getSalary(self):
+        print("salary is not there")
+        
+dev = Employee()
+print(dev.company)
+dev.getSalary()
+Employee.getSalary(dev)
+
+
+++ Static Methods: Defined with the @staticmethod decorator, they don’t modify the class or instance state. They’re just utility functions grouped with the class logically( we do not need to add the self part here now)
+
+eg. 
+class employee():
+    @staticmethod
+    def greet():
+        print("Good Morning")
+Dev = employee()
+Dev.greet()
+
+
+* Constructor
+-The constructor method in Python is always named (__init__).
+-When an instance of a class is created, Python automatically calls __init__, so it runs without needing to be explicitly called.
+-Inside the __init__ method, you define and set instance attributes that are specific to that instance, making each object’s data unique.
+
+---syntax: class ClassName:
+                def __init__(self, parameter1, parameter2, ...):
+                    # Initialize instance attributes here
+                    self.attribute1 = parameter1
+                    self.attribute2 = parameter2
+
+-self refers to the instance of the class being created, allowing the method to access or modify that specific instance’s attributes.
+
+-parameter1, parameter2, etc, are the parameters used to pass values to the object upon instantiation.
+
+eg1. class Employee:
+        def __init__(self, name, salary, language):
+            self.name = name
+            self.salary = salary
+            self.language = language
+            print("I am creating an object")
+    dev = Employee("Dev", 100000000, "Python")
+    print(dev.name, dev.salary, dev.language)
+
+eg2. class Car:
+        def __init__(self, make, model):  # Constructor with make and model parameters
+            self.make = make  # Set the make attribute
+            self.model = model  # Set the model attribute
+
+    # Creating an instance of the Car class
+    car1 = Car("Toyota", "Camry")
+    car2 = Car("Honda", "Accord")
+
+    print(car1.make)   # Outputs: Toyota
+    print(car1.model)  # Outputs: Camry
+    print(car2.make)   # Outputs: Honda
+    print(car2.model)  # Outputs: Accord
+
+eg3.
+class Programmer:
+    company = "Microsoft"
+    def __init__(self, name , salary, language): 
+        self.name = name
+        self.language = language
+        self.salary = salary
+dev = Programmer("Dev", 100000, "python")
+print(dev.name, dev.language, dev.salary, dev.company)
+
+shivani = Programmer("Shivani", 100000, "Java")
+print(shivani.name, shivani.language, shivani.salary, shivani.company)
+
+eg4.
+class Calculator:
+    def __init__(self, square, cube, square_root):
+        self.square = square * square
+        self.cube = cube * cube * cube
+        self.square_root = square_root ** 0.5 #code to find sqare root is (number ** 0.5)
+
+calculate_1 = Calculator(5,5,25)
+print(calculate_1.square, calculate_1.cube, calculate_1.square_root)
+
+
+
+* Inheriatnce 
+-It is a way of creating a new class from an existing class
+-To create a child class that inherits from a parent class, you specify the parent class in parentheses when defining the child class.
+
+---syntax: class ParentClass:
+                # Parent class methods and attributes
+
+            class ChildClass(ParentClass):
+                # Child class methods and attributes
+
+-Parent Class (Base or Superclass): The class whose properties and methods are inherited.
+-Child Class (Derived or Subclass): The class that inherits properties and methods from the parent class.
+---super(): A function that allows access to the parent class's methods and properties within the child class.
+
+eg1.
+class Employee:
+    company = "Microsoft"
+
+class Programmer(Employee):
+    company = "Google"
+     
+a = Employee()
+b = Programmer()
+print(a.company, b.company)
+
+
+eg2.
+class Employee:
+    company = "ICT"
+    name = "Dev"
+    salary = 100000
+    def show(self):
+        print(f"The name of the Employee is {self.name} and the salary is {self.salary}")
+
+class Programmer(Employee):
+    language = "Python"
+    def showLanguage(self):
+        print(f"The name is {self.name} and he is good with {self.language} language.")
+
+a = Employee()
+b = Programmer()
+a.show()
+b.showLanguage()
+print(f"Name is {a.name} and the Language of codding is {b.language}")
+
+
+
++Multuple inheritance 
+-where the child class is made by inheriting more than 1 parent class.
+
+eg1.
+class Employee:
+    company = "ITC"
+    name = "Default Name"
+    def show(self):
+        print(f"the name of the Employee is {self.name} and the company name is {self>company}")
+
+class Coder:
+    language = "Python"
+    def printLanguages(self):
+    print(f"Out of all the languages here is your language: {self.langugae}")
+
+class Programmer(Employee, Coder):
+    company = "ITC Infotech"
+    def showLanguage(self):
+        print(f"The name is {self.name} and the company name is {self.company} and he is good with {self.language} language")
+
+a = Employee()
+b = Programmer()
+b.show()
+b.printLanguages()
+b.showLanguage()
+
+
+
++ Multilevel Inheriatnce
+- here we are making class as child 2 from child 1 and child 1 from parent.
+- the class are connected in level with the parent class as the parent class is at the top then the clilg class continues below as per user.
+
+eg1.
+class Employee:
+    company = "Google"
+    name = "Dev"
+    salary = 100000
+    def show(self):
+        print(f"The name of the Employee is {self.name} and the salary is {self.salary}")
+
+class Programmer(Employee):
+    language = "Python"
+    def showLanguage(self):
+        print(f"The name is {self.name} and he is good with {self.language} language.")
+
+class Manager(Programmer):
+    salary = 200000
+    position = "Tech Manager"
+    def showPosition(self):
+        print(f"The increasen salary is {self.salary} and the new position is {self.position} in the colpany {self.company} as a {self.language} language expert")
+
+a = Employee()
+b = Programmer()
+c = Manager()
+a.show()
+b.showLanguage()
+c.showPosition()
+
+eg2.
+class Grandparent:
+    def show_grandparent(self):
+        return "Grandparent class method"
+
+class Parent(Grandparent):
+    def show_parent(self):
+        return "Parent class method"
+
+class Child(Parent):
+    def show_child(self):
+        return "Child class method"
+
+child = Child()
+print(child.show_grandparent())  # Output: Grandparent class method
+print(child.show_parent())       # Output: Parent class method
+print(child.show_child())        # Output: Child class method
+
+
+
+++ Super() Method
+-super() method is used to access the methods of a super class in the derived class.
+-super() is used to call a method from a parent class. 
+-This is particularly useful for accessing the parent’s constructor or for calling overridden methods.
+
+eg1. 
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class Employee(Person):
+    def __init__(self, name, position):
+        super().__init__(name)  # Call the constructor of Person
+        self.position = position
+
+emp = Employee("Alice", "Developer")
+print(emp.name)       # Output: Alice
+print(emp.position)   # Output: Developer
+
+
+eg2.
+class Employee:
+    def __init__(self):
+        print("Constructor of Employee")
+    a = 1
+
+class Programmer(Employee):
+    def __init__(self):
+        print("Constructor of Programmer")
+    b = 2
+
+class Manager(Programmer):
+    def __init__(self):
+        super().__init__()
+        print("Constructor of Manager")
+    c = 3
+
+x = Manager()
+Print(x.a, x.b, x.c)
+
+
+++ Method Overriding
+
+-Method overriding allows a child class to provide a specific implementation of a method that is already defined in its parent class. 
+-This is helpful when the child class requires different behavior for the method.
+
+Eg1.
+class Animal:
+    def sound(self):
+        return "Some generic sound"
+
+class Dog(Animal):
+    def sound(self):  # Overriding the sound method
+        return "Bark!"
+
+dog = Dog()
+print(dog.sound())  # Output: Bark!
+
+
++?  The isinstance() and issubclass() Functions
+- isinstance() checks if an object is an instance of a specific class or a derived class.
+- issubclass() checks if a class is derived from another class.
+
+Eg1.
+class Animal:
+    def sound(self):
+        return "Some generic sound"
+
+class Dog(Animal):
+    def sound(self):  # Overriding the sound method
+        return "Bark!"
+
+dog = Dog()
+print(dog.sound())  # Output: Bark!
+
+print(isinstance(dog, Animal))       # Output: True
+print(issubclass(Dog, Animal))       # Output: True
+print(issubclass(Animal, Dog))       # Output: False
+
+
+
+++ CLass Method
+- A class method is a method which is bound to the class and not the object of the class.
+- @classmethod decorator is used to create a class method.
+- Class method use cls at the place of self as cls
+
+Eg1.
+class Employee:
+    a = 1
+    @classmethod
+    def show(cls):
+        print(f"The class attribute of a is {cls.a}")
+e = Employee()
+e.a = 45
+e.show()
+
+
+++ Poroerty Decorators
+- The @property decorator in Python is a built-in decorator that makes it easy to use getters and setters within a class. 
+- It allows methods to be accessed like attributes, making your code cleaner and more readable. 
+- With @property, you can define managed attributes, i.e., attributes whose access is controlled by getter, setter, and deleter methods, all while making the attribute look like a simple field.
+
+
++ Usage of @property
+- The @property decorator allows a method to be accessed as an attribute.
+
+eg1.
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius  # we use a leading underscore for internal attributes
+
+    @property
+    def radius(self):
+        """Getter method for radius"""
+        return self._radius
+
+
++ With setter properties 
+
+eg1. 
+class Employee:
+    a = 1
+    @classmethod
+    def show(cls):
+        print(f"The class attribute of a is {cls.a}")
+    
+    @property
+    def name(self):
+        return f"{self.fname} {self.lname}"
+
+    @name.setter
+    def name(self, value):
+        self.fname = value.split(" ")[0]
+        self.lname = value.split(" ")[1]
+
+e = Employee()
+e.a = 45
+
+e.name ="Devashish Sharma"
+print(e.fname, e.lname)
+e.show()
+
+
+
+
+**** Operator overloading 
+- Operators in oython can be overloaded using dunder methods.
+- these methods are called when a given operator is used on the object.
+- Operators in python can be overloaded using the following methods:
+  p1+p2 #p1.__add__(p2)
+  p1-p2 #p1.__sub__(p2)
+  p1*p2 #p1.__mul__(p2)
+  p1/p2 #p1.__truediv__(p2)
+  p1//p2 #p1.__floordiv__(p2)
+
+  other Dunder/magic methods in python:
+  __str__()  #used to set what gets displayed upon calling str(obj)
+  __len__()  #used to set what gets displayed upon calling .__len__() or len(obj)
+
+
+  all in table format:
+Operator	Method
++	        __add__
+-	        __sub__
+*	        __mul__
+/	        __truediv__
+//	        __floordiv__
+%	        __mod__
+**	        __pow__
+==	        __eq__
+!=	        __ne__
+<	        __lt__
+<=	        __le__
+>	        __gt__
+>=	        __ge__
+[]	        __getitem__
+in	        __contains__
+
+eg1.
+class Number:
+    def __init__(self, n):
+        self.n = n
+
+    def __add__(self, Num):
+        return self.n + num.n
+
+n = Number(1)
+m = Number(2)
+
+print(n+m)
+
+
+Eg2.
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        """Overloads the + operator"""
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        """Overloads the str() function for print"""
+        return f"Vector({self.x}, {self.y})"
+
+# Example usage
+v1 = Vector(2, 3)
+v2 = Vector(4, 5)
+v3 = v1 + v2    # Uses __add__ method
+print(v3)       # Outputs: Vector(6, 8)
+
+Eg3.
+class Book:
+    def __init__(self, title, pages):
+        self.title = title
+        self.pages = pages
+
+    def __lt__(self, other):
+        """Overloads the < operator"""
+        return self.pages < other.pages
+
+    def __str__(self):
+        return f"'{self.title}' with {self.pages} pages"
+
+# Example usage
+book1 = Book("Book One", 300)
+book2 = Book("Book Two", 450)
+
+print(book1 < book2)   # Outputs: True
+
+
+Eg4.
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f"Point({self.x}, {self.y})"
+
+    def __repr__(self):
+        return f"Point({self.x}, {self.y})"
+
+# Example usage
+p = Point(1, 2)
+print(p)       # Calls __str__, Outputs: Point(1, 2)
+repr(p)        # Calls __repr__, Outputs: 'Point(1, 2)'
+
+
+
+
+**** Encapsulation 
+- Encapsulation in Python is an OOP (Object-Oriented Programming) concept that binds together the data (attributes) and the methods (functions) that manipulate the data within a class.
+- It also restricts direct access to certain components to prevent accidental modification, thus enhancing security and robustness.
+
+How Encapsulation Works in Python 
+In Python, encapsulation is typically achieved by:
+
+1. Public Members: These are accessible from anywhere.
+2. Protected Members (single underscore _): Suggested to be used only within the class and its subclasses but are technically accessible from outside the class.
+3. Private Members (double underscore __): These are not directly accessible from outside the class due to name mangling, though Python provides ways to access them if needed (not recommended).
+
+
+Eg1.
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner          # Public attribute
+        self._balance = balance      # Protected attribute
+        self.__password = "secure"   # Private attribute
+
+    def deposit(self, amount):
+        """Method to add money to the balance"""
+        if amount > 0:
+            self._balance += amount
+            print(f"${amount} deposited. New balance: ${self._balance}")
+        else:
+            print("Invalid deposit amount")
+
+    def get_balance(self, password):
+        """Method to access the balance with password verification"""
+        if password == self.__password:
+            return self._balance
+        else:
+            return "Access denied: Incorrect password"
+
+    def __str__(self):
+        return f"BankAccount(owner={self.owner}, balance=${self._balance})"
+
+# Accessing Encapsulated Data 
+
+account = BankAccount("Alice", 100)
+print(account.owner)           # Public: Accessible directly
+print(account._balance)        # Protected: Accessible, but discouraged
+print(account.get_balance("secure"))  # Private: Accessed via method with password check
+
+# Trying to access private attribute directly
+try:
+    print(account.__password)
+except AttributeError:
+    print("Cannot access private attribute directly.")
+
+# Accessing private attribute with name mangling (not recommended)
+print(account._BankAccount__password)  # Outputs: secure
+
+
+
+**** Polymerphism 
+- Polymorphism in Python is a concept where an action or method can have different behaviors depending on the objects it interacts with. In other words, polymorphism allows us to define methods in a way that can work with any class or data type that implements certain behaviors. 
+- It promotes flexibility in code, as a single function or method can operate on different types of objects without needing specific handling for each type.
+
+++ Types of Polymorphism
+There are two main types of polymorphism:
+1. Compile-time polymorphism: This type includes function overloading and operator overloading. Python does not support function overloading but supports operator overloading.
+2. Run-time polymorphism: This type of polymorphism occurs when different classes share a method with the same name, and the correct method is called depending on the type of object calling it. This is achieved through method overriding in Python.
+
+Eg1. # Polymorphism With Functions
+# Polymorphic function
+def add(x, y):
+    return x + y
+
+# The add function works with different types
+print(add(10, 20))        # Outputs: 30 (integer addition)
+print(add("Hello, ", "World!"))  # Outputs: Hello, World! (string concatenation)
+print(add([1, 2], [3, 4]))       # Outputs: [1, 2, 3, 4] (list concatenation)
+
+
+Eg2. # PolymerphismWith Class Method
+class Dog:
+    def sound(self):
+        return "Woof!"
+
+class Cat:
+    def sound(self):
+        return "Meow!"
+
+# Polymorphic function
+def make_sound(animal):
+    print(animal.sound())
+
+dog = Dog()
+cat = Cat()
+
+make_sound(dog)   # Outputs: Woof!
+make_sound(cat)   # Outputs: Meow!
+
+
+Eg3. #Polymerphism With inheritance
+class Animal:
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+animals = [Dog(), Cat()]
+
+for animal in animals:
+    print(animal.speak())
+
+
+Eg4. # Polymerphism with Operator overloading
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+
+v1 = Vector(2, 3)
+v2 = Vector(4, 5)
+v3 = v1 + v2  # Uses the overloaded __add__ method
+print(v3)     # Outputs: Vector(6, 8)
+
+
+
+
+
+
+
+
+
+
+
+_____________________________________
+
+******ADVANCE PYTHON****** 
+_____________________________________
+
+**** Walrus Operator
+- The Walrus Operator (:=), introduced in pyhton 3.8, allows you to assign values to variables as part pf an expression.
+- This operator, named for its resemblance to the eyes and tusks of a walrus, id officially called the "assignment operator.
+
+Eg1.
+if (n := len([1, 2, 3, 4, 5])) > 3:
+    print(f"The list is too long ({n} elements, expected are <= 3)")
+
+Eg2.
+# Without walrus operator
+n = len(data)
+if n > 5:
+    print(f"Data has {n} elements.")
+
+# With walrus operator
+if (n := len(data)) > 5:
+    print(f"Data has {n} elements.")
+
+Eg3.
+# Using walrus operator in a list comprehension
+data = [1, 2, 3, 4, 5]
+squares = [square for x in data if (square := x ** 2) > 5]
+print(squares)  # Output: [9, 16, 25]
+
+
+Eg4.
+def process_data(data):
+    if (n := len(data)) > 0:
+        print(f"Processing {n} items.")
+    else:
+        print("No items to process.")
+
+data = [1, 2, 3]
+process_data(data)  # Output: Processing 3 items.
+
+
+
+*** Type Definations 
+- Type hints are added using the colon (:) syntan for variables and the -> syntax for function return types. (use to get the options for the data tpye only while codding, easier to identify)
+
+Eg1.
+#variable types hint
+age: int = 25
+
+#function type hints
+def greeting(name: str) -> str:
+    return f"hello, {name}!"
+
+#usage
+print(greeting("Alice"))
+
+
+
+***Advance Type hints
+- Python's typing module provides more advanced type hints, such as list, dict, and union,
+- You can inport List, tuple, and Dict type from the typing module like this:
+from typing import List, Tuple, Dict, Union 
+
+Eg1.
+from typing import List, Tuple, Union
+
+# Define a type alias for a Person
+Person = Tuple[str, int]  # A tuple with a string (name) and an integer (age)
+
+def process_people(people: List[Union[Person, str]]) -> None:
+    for person in people:
+        if isinstance(person, tuple):
+            # Unpack the tuple
+            name, age = person
+            print(f"Processing person: Name = {name}, Age = {age}")
+        elif isinstance(person, str):
+            print(f"Processing person: Name = {person}, Age = Unknown")
+
+# Example usage
+people_list = [
+    ("Alice", 30),          # Tuple (Person)
+    "Bob",                  # String (Name)
+    ("Charlie", 25),       # Tuple (Person)
+    "Diana"                 # String (Name)
+]
+
+process_people(people_list)
+
+
+
+***** Maych case 
+- Similar to switch case 
+- The basic syntax of the match statement involves matching a variable against several cases using the case keyword.
+
+Eg1.
+def http_status(status):
+    match status:
+        case 200:
+            return "Ok"
+        case 404:
+            return "Not Found"
+        case 500:
+            return "Internal server Error"
+        case _:
+            return "unknown Status"
+
+#usage
+print(http_status(200))
+print(http_status(404))
+print(http_status(500))
+print(http_status(403))
+
+
+
+******Exception Handling*******
+- Exception handling in Python is a way to gracefully handle errors that occur during the execution of a program. 
+- Instead of letting the program crash when an error occurs, Python allows you to catch exceptions and respond accordingly.
+- This can help improve the robustness and reliability of your code.
+
+-Syntax: The basic syntax for exception handling in Python uses the try, except, else, and finally blocks:-
+
+try:
+    # Code that may raise an exception
+    risky_operation()
+except SomeSpecificException as e:
+    # Code that runs if the specified exception occurs
+    handle_exception(e)
+except AnotherException:
+    # Handling another type of exception
+    handle_another_exception()
+else:
+    # Code that runs if no exceptions were raised
+    print("Operation succeeded!")
+finally:
+    # Code that runs no matter what (optional)
+    cleanup()
+
+Eg1.
+try:
+    a = int(input("Hey, Enter a number:"))
+    print(a)
+except Exception as e:
+    print(e)
+    print("Correct the code")
+
+
+Eg(main).
+def divide_numbers(numerator: float, denominator: float) -> float:
+    try:
+        # Attempt to perform division
+        result = numerator / denominator
+    except ZeroDivisionError as e:
+        # Handle division by zero
+        print("Error: Cannot divide by zero.")
+        return None
+    except TypeError as e:
+        # Handle type errors (e.g., if inputs are not numbers)
+        print("Error: Inputs must be numbers.")
+        return None
+    else:
+        # This block runs if no exceptions were raised
+        print("Division succeeded!")
+        return result
+    finally:
+        # This block always runs, regardless of whether an exception occurred
+        print("Execution of divide_numbers() complete.")
+
+# Example usage
+print(divide_numbers(10, 2))  # Output: Division succeeded! 5.0
+print(divide_numbers(10, 0))  # Output: Error: Cannot divide by zero. None
+print(divide_numbers(10, "a"))  # Output: Error: Inputs must be numbers. None
+
+-+- Explanation (Of the above code)
+1. Try Block: The try block contains the code that might raise an exception (in this case, division).
+
+2. Except Blocks: 
+- The first except block catches ZeroDivisionError and handles the case where the denominator is zero.
+- The second except block catches TypeError, which occurs if the inputs are not numbers.
+- You can specify multiple except blocks to handle different types of exceptions.
+- Else Block: The else block executes if the code in the try block does not raise any exceptions. Here, it indicates successful division.
+- Finally Block: The finally block runs regardless of whether an exception was raised or not. It's often used for cleanup actions, such as closing files or releasing resources.
+
+
+
++++ Catching All Exceptions (Basic Part and Important)
+- You can also catch all exceptions using a bare except clause, but it's generally not recommended because it makes debugging harder by masking the underlying issues:
+
+-Syntax:
+try:
+    # Code that might raise any exception
+    risky_operation()
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+
++++ Raising Exceptions
+- You can raise exceptions using the raise keyword. This is useful for enforcing certain conditions in your code:
+
+-Syntax:
+def check_positive(number: float) -> None:
+    if number < 0:
+        raise ValueError("Number must be positive.")
+    print(f"Number is: {number}")
+
+try:
+    check_positive(-5)
+except ValueError as e:
+    print(e)  # Output: Number must be positive.
+
+
+Eg1. 
+a = int(input("Enter First No.:"))
+b = int(input("Enter Second No.:"))
+
+if(b == 0):
+    raise ZeroDivisionError("Hey our program is not meant t0 divide number by zero")
+else:
+    print(f"The division a/b is {a/b}")
+
+
+
+++++ Try With Else clause
+- sometimes we want to run a peice of code when try was successful.
+
+Syntax:
+try:
+    #code
+Except:
+    #code
+else:
+    #code   #this is executed only if the try was succcessful 
+
+
+Eg1.
+try:
+    a = int(input("Enter an Number:"))
+    print(a)
+
+Except Exception as e:
+    print(e)
+
+else:
+    print("I am inside else")
+
+
+
++++ Try with Finally
+- Pyton offers a 'finally' clause which ensure execution of a peice of code inspective of the exception.(mostly we see its use it in functions and all)
+
+Syntax:
+try:
+    #code
+except:
+    #code
+finally:
+    #code   #Executed regardless of errors!
+
+Eg1. 
+def main():
+    try:
+        a = int(input("Enter a number:"))
+        print(a)
+        return
+    except Exception as e:
+        print(e)
+        return
+    finally:
+        print("Hey I am inside of finally")
+
+main()
+
+
+
+****__name__, __main__ and __name__ == __main__ functions 
+
+print(__name__)   -----#will give '__main__' if we are running the code in same file but if we are running the code in different file by importing the file or something then it will print 'file name'
+
+
+***global keyword and variable 
+- The variable assigned to be used by functiond, operations and all other parts are global variable.
+
+eg.
+a = 45   # global variable 
+def fun()
+    global a    # Global keyword use to change the preferance or the variable.
+    a = 3    # Functional variable
+    print(a)
+
+fun()
+print(a)
+
+
+*** Enumerate Function in Python 
+- The 'enumerate' function adds counter to an iterable and returns it
+
+eg.
+for i,item in list1:
+    print(i, item) # prints the items of the list 1 with index
+
+
+
+*** List comprehension
+
+eg1. bigger code 
+myList = [1, 2, 9, 5, 3, 5]
+squaredList = []
+for item in myList:
+    squaredList,append(item*item)
+
+print(squaredList)
+
+# Now the shotter code:
+myList = [1, 2, 9, 5, 3, 5]
+squaredList = [i*i for i in myList]
+print(squareList)
+
+
+
+**** Virtual Enviornment 
+- An enviornment which is same as the system interpreter but is isolated from the other Python environments on the system.
+
+++ Installation
+- to use virtual enviourment we write:
+pip install virtualenv  #install the package
+
+- we create a new enviornment using:
+virtualenv myprojectenv  #Creates a new virtualenv
+
+ 
+
+ *** pip freeze 
+ - use to get the details of the installed packages in python in my system. 
+ - syntax: "pip freeze"
+
+
+
+ ****Lamda Function
+ - A lambda function is an anonymous (unnamed) function defined with the lambda keyword. It is a concise way to write small functions without the need for a formal def statement.
+ 
+ Syntax: 
+ lambda arguments: expression
+
+ Eg1.
+ # Regular function
+def add(x, y):
+    return x + y
+
+# Lambda function equivalent
+add_lambda = lambda x, y: x + y
+
+print(add_lambda(2, 3))  # Output: 5
+
+Eg2.
+square = lambda x:x*x
+square(6)  # returns 36
+sum = lambda a, b, c : a+b+c 
+sum(2, 4, 5)
+
+
+****String Methods
++++Join Method(string)
+- creating a string from iterable objects.
+
+eg1.
+l = ["apple", "mango", "banana"]
+result = ", and , ".join(l)
+print(result)
+
+eg2.
+a = ["Dev", "Devil", "King"]
+final = "::".join(a)
+print(final)
+
+
+++Format Method()
+- formats the values inside the string into a desired output.
+Syntax:
+"{} is a good {}".format("Dev", "Boy")
+"{1} is a goof {0}".format("Dev", "Boy")
+
+
+
+++++  MAP, FILTER AND REDUCE
+
++++ Map
+- map applies a function to all the items in an input_list
+Syntax:
+map(function, input_list)
+           #The function can be lambda Function 
+
+Eg.
+l = [1, 2, 3, 4, 5]
+square = lambda x:x*x
+
+sqList = map(square, l)
+print(list(sqList))
+
+
+
++++ Filter
+- Filter create a list of items for which the function returns true.
+Syntax:
+list(filter(function))
+            #the function can be lambda function
+
+eg. 
+l = [1, 2, 3, 4, 5]
+def even(n);
+    if ((n%2) == 0):
+        return True
+    return False
+
+pnlyEven = filter(even, l)
+ print(list(onlyEven))
+
+
+
++++ Reduce 
+- Reduce applies a rolling computation to sequential pair of element 
+Syntax:
+from functools import reduce 
+l = [1, 2, 3, 4, 5]
+val = reduce (function list1)
+            #The function can be lambda function 
+
+eg. 
+import reduce from functools
+def sum(a, b)
+    return a + b 
+
+print(reduce(sum, l))
